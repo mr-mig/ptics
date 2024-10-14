@@ -18,6 +18,14 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_response :created
   end
 
+  test "should create task with default state if not state parameter is passed" do
+    assert_difference("Task.count") do
+      post tasks_url, params: { task: { list_id: @task.list_id, owner_id: @task.owner_id, title: @task.title } }, as: :json
+    end
+
+    assert_response :created
+  end
+
   test "should show task" do
     get task_url(@task), as: :json
     assert_response :success

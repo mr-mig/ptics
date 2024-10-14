@@ -2,36 +2,36 @@
 
 t1:
   title: Task1
-  state: TODO
+  state: todo
   owner: u1
   list: l1
 
 t2:
   title: Task2
-  state: TODO
+  state: todo
   owner: u1
   list: l1
 
 t3:
   title: Task3
-  state: ONGOING
+  state: ongoing
   owner: u2
   list: l1
 
 t4:
   title: Task4
-  state: DONE
+  state: done
   owner: u2
   list: l2
 
 t5:
   title: Task5
-  state: DONE
+  state: done
   owner: u2
   list: l2
 
 t6:
   title: Task6
-  state: ONGOING
+  state: ongoing
   owner: u1
   list: l2
