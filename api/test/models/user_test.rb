@@ -10,9 +10,9 @@ class UserTest < ActiveSupport::TestCase
     assert user.save
   end
 
-  # test "User.fresh creates a new user with random name" do
-  #   user = User.fresh
-  #   assert user.save
-  #   assert_not_nil user.name
-  # end
+  test "User.fresh creates a new user with random name" do
+    user = User.fresh
+    assert user.save
+    assert_not_nil user.name
+  end
 end
