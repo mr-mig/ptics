@@ -42,7 +42,8 @@
       "extensions": [
         "ms-azuretools.vscode-docker",
         "shopify.ruby-lsp",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "cweijan.vscode-postgresql-client2"
       ]
     }
   },
