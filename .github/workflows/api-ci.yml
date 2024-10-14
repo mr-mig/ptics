@@ -77,7 +77,7 @@ jobs:
           DB_DATABASE: postgres
           DB_HOST: localhost
           DB_USER: postgres
-          DB_PASSWORD: password
+          DB_PASSWORD: postgres
           RAILS_ENV: test
           WITH_COVERAGE: true
           DISABLE_SPRING: 1
