@@ -17,7 +17,12 @@
   "containerEnv": {
     "REDIS_URL": "redis://redis:6379/1",
     "DB_HOST": "postgres",
-    "WORKSPACE_DIR": "${containerWorkspaceFolder}"
+    "WORKSPACE_DIR": "${containerWorkspaceFolder}",
+
+    // Set the DISPLAY environment variable to allow GUI applications to run.
+    // This should be mapped to XQuartz on macOS (if your host machine is Mac).
+    // see https://gist.github.com/paul-krohn/e45f96181b1cf5e536325d1bdee6c949
+    "DISPLAY": "host.docker.internal:0"
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
