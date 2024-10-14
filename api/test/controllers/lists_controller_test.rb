@@ -10,6 +10,13 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get list with tasks" do
+    get list_url(@list), as: :json
+    assert_response :success
+    json_response = JSON.parse(response.body)
+    assert_equal @list.tasks.length, json_response["tasks"].length
+  end
+
   test "should create list" do
     assert_difference("List.count") do
       post lists_url, params: { list: { owner_id: @list.owner_id, title: @list.title } }, as: :json

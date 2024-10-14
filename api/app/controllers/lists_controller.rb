@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: %i[ show update destroy ]
+  before_action :set_list, only: %i[show update destroy ]
 
   # GET /lists
   def index
@@ -10,7 +10,7 @@ class ListsController < ApplicationController
 
   # GET /lists/1
   def show
-    render json: @list
+    render json: @list.to_json(include: :tasks)
   end
 
   # POST /lists
