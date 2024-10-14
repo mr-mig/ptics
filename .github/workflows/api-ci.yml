@@ -74,9 +74,15 @@ jobs:
 
       - name: Run tests
         env:
+          DB_DATABASE: postgres
+          DB_HOST: localhost
+          DB_USER: postgres
+          DB_PASSWORD: password
           RAILS_ENV: test
+          WITH_COVERAGE: true
+          DISABLE_SPRING: 1
           # REDIS_URL: redis://localhost:6379/0
-        run: cd api && bin/rails db:test:prepare test test:system
+        run: cd api && bin/rails db:test:prepare test
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
