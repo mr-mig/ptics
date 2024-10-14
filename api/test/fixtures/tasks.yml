@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+t1:
+  title: Task1
+  state: TODO
+  owner: u1
+  list: l1
+
+t2:
+  title: Task2
+  state: TODO
+  owner: u1
+  list: l1
+
+t3:
+  title: Task3
+  state: ONGOING
+  owner: u2
+  list: l1
+
+t4:
+  title: Task4
+  state: DONE
+  owner: u2
+  list: l2
+
+t5:
+  title: Task5
+  state: DONE
+  owner: u2
+  list: l2
+
+t6:
+  title: Task6
+  state: ONGOING
+  owner: u1
+  list: l2
