@@ -16,11 +16,18 @@ class ListsController < ApplicationController
   # POST /lists
   def create
     @list = List.new(list_params)
+    @list.login_key = SecureRandom.hex(10) # Generates a random 20-character string
 
     if @list.save
       render json: @list, status: :created, location: @list
     else
-      render json: @list.errors, status: :unprocessable_entity
+      #check for validation errors
+      
+      if @list.errors.any?
+        render json: @list.errors, status: :bad_request
+      else
+        render json: @list.errors, status: :internal_server_error
+      end
     end
   end
 
@@ -29,7 +36,7 @@ class ListsController < ApplicationController
     if @list.update(list_params)
       render json: @list
     else
-      render json: @list.errors, status: :unprocessable_entity
+      render json: @list.errors, status: :internal_server_error
     end
   end
 

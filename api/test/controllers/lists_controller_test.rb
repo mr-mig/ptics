@@ -16,6 +16,17 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :created
+    created_list = List.last
+    assert_not_nil created_list.login_key
+    assert_equal 20, created_list.login_key.length
+  end
+
+  test "should return validation error when owner_id is incorrect" do
+    post lists_url, params: { list: { owner_id: 0, title: "test" } }, as: :json
+
+    assert_response :bad_request
+    json_response = JSON.parse(response.body)
+    assert_includes json_response["owner"], "must exist"
   end
 
   test "should show list" do
