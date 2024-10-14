@@ -26,7 +26,15 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1
   def update
-    if @task.update(task_params)
+    if task_params[:state].present? and task_params[:state] != @task.state
+      begin
+        transition_state(task_params[:state])
+      rescue AASM::InvalidTransition => e
+        return render json: { error: e.message }, status: :unprocessable_entity
+      end
+    end
+
+    if @task.update(task_params.except(:state))
       render json: @task
     else
       render json: @task.errors, status: :unprocessable_entity
@@ -47,5 +55,16 @@ class TasksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def task_params
       params.require(:task).permit(:title, :state, :owner_id, :list_id)
+    end
+
+    def transition_state(new_state)
+      case new_state
+      when 'ongoing'
+        @task.start
+      when 'done'
+        @task.complete
+      when 'todo'
+        @task.reset
+      end
     end
 end

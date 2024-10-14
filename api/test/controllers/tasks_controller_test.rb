@@ -36,6 +36,22 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should transition task between states" do
+    patch task_url(@task), params: { task: { list_id: @task.list_id, owner_id: @task.owner_id, state: "ongoing", title: @task.title } }, as: :json
+    assert_response :success
+  end
+
+  test "should return validation error when incorrect state transition is requested" do
+    @task.start!
+    @task.complete!
+
+    patch task_url(@task), params: { task: { list_id: @task.list_id, owner_id: @task.owner_id, state: "todo", title: @task.title } }, as: :json
+
+    assert_response :unprocessable_entity
+    json_response = JSON.parse(response.body)
+    assert_includes json_response["error"], "Event 'reset' cannot transition from 'done'."
+  end
+
   test "should destroy task" do
     assert_difference("Task.count", -1) do
       delete task_url(@task), as: :json
