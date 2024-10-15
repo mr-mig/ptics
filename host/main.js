@@ -3,11 +3,12 @@ const IS_MAC_OS = process.platform === 'darwin'
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 1200,
+    width: 600,
     height: 900
   })
-
+  
   win.loadFile('index.html')
+  // win.loadURL('http://localhost:3002/')
 }
 
 app.whenReady().then(() => {

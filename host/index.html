@@ -5,16 +5,16 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+      content="default-src 'self' http://localhost:3002/; script-src 'self'; style-src 'unsafe-inline';"
     />
     <meta
       http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+      content="default-src 'self' http://localhost:3002/; script-src 'self'; style-src 'unsafe-inline';"
     />
-    <title>Hello from Electron renderer!</title>
+    <title>Electron renderer!</title>
   </head>
-  <body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋👋👋👋</p>
+  <body style="display: flex; flex-direction: column; min-height: 100vh; height:100%; width: 100%; margin: 0;">
+    <h1>Electron host renderer!</h1>
+    <iframe style="flex-grow: 1; border-width:0px" src="http://localhost:3002"></iframe>
   </body>
 </html>
