@@ -27,6 +27,7 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
     3000,
+    3002,
     5432,
     6379
   ],
@@ -43,7 +44,8 @@
         "ms-azuretools.vscode-docker",
         "shopify.ruby-lsp",
         "github.vscode-github-actions",
-        "cweijan.vscode-postgresql-client2"
+        "cweijan.vscode-postgresql-client2",
+        "svelte.svelte-vscode"
       ]
     }
   },
