@@ -1,12 +1,19 @@
-<script>
-    import svelteLogo from '/svelte.svg'
-    import viteLogo from '/vite.svg'
+<script lang="ts">
+    import svelteLogo from "/svelte.svg";
+    import viteLogo from "/vite.svg";
+
+    export let scrollable: HTMLElement | null = null
 </script>
 
 <header>
     <slot name="header">Stack Layout</slot>
 </header>
-<main>
+{#if $$slots.north}
+    <div class="north">
+        <slot name="north" />
+    </div>
+{/if}
+<main bind:this={scrollable}>
     <div class="scrollable">
         <slot name="main" />
     </div>
@@ -32,6 +39,14 @@
         border-bottom: 1px solid var(--border-color);
     }
 
+    .north {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+    }
+
     main {
         overflow-y: auto;
         flex-grow: 1;
@@ -43,6 +58,7 @@
     .scrollable {
         max-height: 100%;
         width: 100%;
+        align-self: flex-start;
     }
 
     footer {

@@ -1,13 +1,13 @@
 import { expect, test, beforeEach } from 'vitest'
-import { tasks, type Task, start, complete, reopen, reset, create, remove } from './tasks.store'
+import { tasks, type Task, start, complete, reopen, reset, create, remove, STATES } from './tasks.store'
 import { get } from 'svelte/store'
 
 // Initial setup for tasks 
 // the functiona makes sure that every new test starts with the same initial state without mutations
 const initialTasks: () => Task[] = () => [
-    { id: 1, title: 'Task 1', state: 'todo', owner: { id: 1, name: 'test' }, updated_at: new Date() },
-    { id: 2, title: 'Task 2', state: 'ongoing', owner: { id: 1, name: 'test' }, updated_at: new Date() },
-    { id: 3, title: 'Task 3', state: 'done', owner: { id: 1, name: 'test' }, updated_at: new Date() }
+    { id: 1, title: 'Task 1', state: STATES.TODO, owner: { id: 1, name: 'test' }, updated_at: new Date() },
+    { id: 2, title: 'Task 2', state: STATES.ONGOING, owner: { id: 1, name: 'test' }, updated_at: new Date() },
+    { id: 3, title: 'Task 3', state: STATES.DONE, owner: { id: 1, name: 'test' }, updated_at: new Date() }
 ];
 
 // Helper function to reset tasks to initial state
@@ -29,62 +29,61 @@ test('start action', () => {
     start(get(tasks)[0]);
     const task = get(tasks)[0];
     expect(task).toBeDefined();
-    expect(task!.state).toBe('ongoing');
+    expect(task!.state).toBe(STATES.ONGOING);
 })
 
 test('start action on `done` is a noop', () => {
     start(get(tasks)[2]);
     const task = get(tasks)[2];
     expect(task).toBeDefined();
-    expect(task!.state).toBe('done');
+    expect(task!.state).toBe(STATES.DONE);
 })
 
 test('complete action', () => {
     complete(get(tasks)[1]);
     const task = get(tasks)[1];
     expect(task).toBeDefined();
-    expect(task!.state).toBe('done');
+    expect(task!.state).toBe(STATES.DONE);
 })
 
 test('complete action on `todo` is a noop', () => {
     complete(get(tasks)[0]);
     const task = get(tasks)[0];
     expect(task).toBeDefined();
-    expect(task!.state).toBe('todo');
+    expect(task!.state).toBe(STATES.TODO);
 })
 
 test('reopen action', () => {
     reopen(get(tasks)[2]);
     const task = get(tasks)[2];
     expect(task).toBeDefined();
-    expect(task!.state).toBe('ongoing');
+    expect(task!.state).toBe(STATES.ONGOING);
 })
 
 test('reopen action on `ongoing` is a noop', () => {
     reopen(get(tasks)[1]);
     const task = get(tasks)[1];
     expect(task).toBeDefined();
-    expect(task!.state).toBe('ongoing');
+    expect(task!.state).toBe(STATES.ONGOING);
 })
 
 test('reset action', () => {
     reset(get(tasks)[1]);
     const task = get(tasks)[1]
     expect(task).toBeDefined();
-    expect(task!.state).toBe('todo');
+    expect(task!.state).toBe(STATES.TODO);
 })
 
 test('reset action on `done` is a noop', () => {
     reset(get(tasks)[2]);
     const task = get(tasks)[2]
     expect(task).toBeDefined();
-    expect(task!.state).toBe('done');
+    expect(task!.state).toBe(STATES.DONE);
 })
 
-test('create action', () => {
-    const newTask: Task = { id: 4, title: 'Task 4', state: 'todo', owner: { id: 1, name: 'test' }, updated_at: new Date() };
-    create(newTask);
-    const task = get(tasks)[3];
+test('create action prepends the task', () => {
+    create('Task 4');
+    const task = get(tasks)[0];
     expect(task).toBeDefined();
     expect(task!.title).toBe('Task 4');
 })
