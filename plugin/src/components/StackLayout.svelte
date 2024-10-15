@@ -7,7 +7,9 @@
     <slot name="header">Stack Layout</slot>
 </header>
 <main>
-    <slot name="main" />
+    <div class="scrollable">
+        <slot name="main" />
+    </div>
 </main>
 <footer>
     <slot name="footer">
@@ -25,6 +27,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        text-align: center;
 
         border-bottom: 1px solid var(--border-color);
     }
@@ -32,6 +35,14 @@
     main {
         overflow-y: auto;
         flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .scrollable {
+        max-height: 100%;
+        width: 100%;
     }
 
     footer {
