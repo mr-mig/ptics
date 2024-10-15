@@ -8,6 +8,8 @@
         <li>
             <Task {task}/>
         </li>
+    {:else}
+        <li class="empty">This list is empty. Create new tasks!</li>
     {/each}
 </ul>
 
@@ -20,5 +22,13 @@
     li {
         margin: 0;
         padding: 0;
+        margin: var(--space-medium) 0;
+    }
+    li:first-child {
+        margin-top: var(--space-small);
+    }
+    .empty {
+        padding: 1em;
+        text-align: center;
     }
 </style>

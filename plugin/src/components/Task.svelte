@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { complete, reopen, reset, start, type Task } from "../lib/tasks.store";
+    import { complete, remove, reopen, reset, start, type Task } from "../lib/tasks.store";
 
     export let task: Task;
     
@@ -22,6 +22,7 @@
 </script>
 
 <div class="panel">
+    <div class="status" class:active={task.state === 'ongoing'}></div>
     <div class="actions">
         {#if task.state === 'todo'}
             <button class="small" on:click={() => start(task)}>▶️</button>
@@ -45,14 +46,16 @@
             <div class="time">{formatTime(task.updated_at)}</div>
         </div>
     </div>
+    <div class="delete-container">
+        <button class="small" on:click={() => remove(task)}>❌</button>
+    </div>
 </div>
 
 <style>
     .panel {
         border: 1px solid var(--border-color);
         background-color: var(--panel-bg-color);
-        border-radius: 6px;
-        margin: 0.6em 0;
+        border-radius: var(--space-small);
 
         min-height: 2em;
         min-width: 400px;
@@ -61,8 +64,17 @@
         align-items: center;
     }
 
+    .status {
+        align-self: stretch;
+        border: transparent solid var(--space-xsmall);
+    }
+
+    .status.active{
+        border: var(--active-accent-color) solid var(--space-xsmall);
+    }
+
     .actions {
-        padding: 1em 0 1em 0.6em;
+        padding: var(--space-medium) 0 var(--space-medium) var(--space-medium);
         flex-grow: 1;
         flex-basis: 3em;
     }
@@ -71,7 +83,7 @@
         font-size: 0.8em;
         height: 2.2em;
         vertical-align: middle;
-        padding: 0.2em 0.4em;
+        padding: var(--space-xsmall) var(--space-small);
     }
 
     .title {
@@ -97,15 +109,15 @@
     }
 
     .owner {
-        padding: 0.6em 1em;
+        padding: var(--space-medium) var(--space-large);
         display: inline-block;
-        font-size: 0.4em;
+        font-size: var(--space-small)
     }
 
     .timestamp {
-        padding: 0.6em 1em;
+        padding: var(--space-medium) var(--space-large);
         display: inline-block;
-        font-size: 0.4em;
+        font-size: var(--space-small)
     }
 
 </style>

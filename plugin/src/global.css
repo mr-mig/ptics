@@ -4,6 +4,12 @@
   --panel-bg-color:#202020;
   --shaded-text: #ffffff58;
   --metadata-text: #ffffffb2;
+  --active-accent-color: #9191fa;
+
+  --space-xsmall: 0.2em;
+  --space-small: 0.4em;
+  --space-medium: 0.6em;
+  --space-large: 1.2em;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -51,9 +57,9 @@ h1 {
 }
 
 input, button {
-  border-radius: 8px;
+  border-radius: var(--space-small);
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: var(--space-medium) var(--space-large);
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
