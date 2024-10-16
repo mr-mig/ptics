@@ -33,7 +33,7 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 group :test do
-  gem 'mocha'
+  gem "mocha"
 end
 
 group :development, :test do

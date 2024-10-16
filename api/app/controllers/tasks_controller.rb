@@ -59,11 +59,11 @@ class TasksController < ApplicationController
 
     def transition_state(new_state)
       case new_state
-      when 'ongoing'
+      when "ongoing"
         @task.start
-      when 'done'
+      when "done"
         @task.complete
-      when 'todo'
+      when "todo"
         @task.reset
       end
     end

@@ -21,8 +21,8 @@ class ListsController < ApplicationController
     if @list.save
       render json: @list, status: :created, location: @list
     else
-      #check for validation errors
-      
+      # check for validation errors
+
       if @list.errors.any?
         render json: @list.errors, status: :bad_request
       else

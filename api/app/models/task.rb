@@ -1,10 +1,10 @@
 class Task < ApplicationRecord
-  include AASM 
+  include AASM
 
   belongs_to :owner, class_name: "User"
   belongs_to :list
 
-  aasm column: 'state' do
+  aasm column: "state" do
     state :todo, initial: true
     state :ongoing
     state :done
@@ -12,7 +12,7 @@ class Task < ApplicationRecord
     event :start do
       transitions from: :todo, to: :ongoing
     end
-    
+
     event :complete do
       transitions from: :ongoing, to: :done
     end
