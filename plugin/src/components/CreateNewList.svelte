@@ -29,7 +29,7 @@
         createTask()
     }
 
-    function handleKeyPress(event: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
+    function handleKeyPress(event: KeyboardEvent) {
         if (event.key === "Enter") {
             createTask()
         }

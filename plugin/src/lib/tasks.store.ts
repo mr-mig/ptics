@@ -14,7 +14,7 @@ export type Task = {
     title: string;
     state: typeof STATES.DONE | typeof STATES.ONGOING | typeof STATES.TODO;
     owner: User;
-    updated_at: Date;
+    updated_at: string;
 }
 
 export function start(task: Task) {
@@ -53,7 +53,7 @@ export function create(taskTitle: string) {
         owner: get(user)!,
         updated_at: new Date(),
     };
-    tasks.update(t => [task, ...t]);
+    return task
 }
 
 export function remove(task: Task) {

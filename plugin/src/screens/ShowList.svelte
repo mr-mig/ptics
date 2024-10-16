@@ -1,7 +1,7 @@
 <script lang="ts">
-    import List from "../components/List.svelte";
+    import ListView from "../components/ListView.svelte";
     import StackLayout from "../components/StackLayout.svelte";
-    import TaskAdd from "../components/AddTask.svelte";
+    import CreateNewTask from "../components/CreateNewTask.svelte";
     import { list } from "../lib/list.store";
     import { user } from "../lib/user.store";
 
@@ -27,11 +27,11 @@
         </div>
     </svelte:fragment>
     <svelte:fragment slot="north">
-        <TaskAdd on:taskAdded={resetScroll} />
+        <CreateNewTask on:taskAdded={resetScroll} />
     </svelte:fragment>
     <svelte:fragment slot="main">
         <div class="scrollable">
-            <List />
+            <ListView />
         </div>
     </svelte:fragment>
 </StackLayout>

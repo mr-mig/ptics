@@ -3,21 +3,21 @@
 
     export let task: Task;
     
-    function formatDate(date: Date): string {
+    function formatDate(ISODate: string): string {
         return new Intl.DateTimeFormat("en-UK", {
             weekday: "short",
             month: "short",
             day: "2-digit",
-        }).format(date);
+        }).format(new Date(ISODate));
     }
 
-    function formatTime(date: Date): string {
+    function formatTime(ISODate: string): string {
         return new Intl.DateTimeFormat("en-UK", {
             hour: "2-digit",
             hour12: false,
             minute: "2-digit",
             second: "2-digit",
-        }).format(date);
+        }).format(new Date(ISODate));
     }
 </script>
 

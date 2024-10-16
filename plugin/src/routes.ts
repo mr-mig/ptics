@@ -1,6 +1,6 @@
 import JoilList from './screens/JoilList.svelte';
 import NotFound from './screens/NotFound.svelte';
-import ViewList from './screens/ViewList.svelte';
+import ShowList from './screens/ShowList.svelte';
 import { wrap } from 'svelte-spa-router/wrap';
 import { get } from 'svelte/store';
 import { user } from './lib/user.store';
@@ -18,14 +18,14 @@ const listJoined = () => {
 
 export default {
     '/': wrap({
-        component: ViewList,
+        component: ShowList,
         conditions: [
             userExists, listJoined
         ]
     }),
     '/join': JoilList,
     '/list/:id': wrap({
-        component: ViewList,
+        component: ShowList,
         conditions: [
             userExists
         ]
