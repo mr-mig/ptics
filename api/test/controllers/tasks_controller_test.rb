@@ -16,6 +16,9 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :created
+    json_response = JSON.parse(response.body)
+    assert_equal @task.owner_id, json_response['owner']['id']
+    assert_equal @task.owner.name, json_response['owner']['name']
   end
 
   test "should create task with default state if not state parameter is passed" do

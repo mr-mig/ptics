@@ -17,6 +17,14 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @list.tasks.length, json_response["tasks"].length
   end
 
+  test "should return all tasks for a given list" do
+    get list_tasks_url(@list), as: :json
+    assert_response :success
+    json_response = JSON.parse(response.body)
+    assert_equal @list.tasks.length, json_response.length
+    assert_equal @list.tasks.first.title, json_response.first["title"]
+  end
+
   test "should create list" do
     title = Faker::Adjective.positive
     assert_difference("List.count") do

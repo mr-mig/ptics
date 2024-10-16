@@ -3,14 +3,19 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all
+    if (params[:list_id])
+      @list = List.find(params[:list_id])
+      @tasks = @list.tasks
+    else 
+      @tasks = Task.all
+    end
 
-    render json: @tasks
+    render json: @tasks.as_json(include: :owner)
   end
 
   # GET /tasks/1
   def show
-    render json: @task
+    render json: @task.as_json(include: :owner)
   end
 
   # POST /tasks
@@ -18,7 +23,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      render json: @task, status: :created, location: @task
+      render json: @task.as_json(include: :owner), status: :created, location: @task
     else
       render json: @task.errors, status: :unprocessable_entity
     end
@@ -35,7 +40,7 @@ class TasksController < ApplicationController
     end
 
     if @task.update(task_params.except(:state))
-      render json: @task
+      render json: @task.as_json(include: :owner)
     else
       render json: @task.errors, status: :unprocessable_entity
     end
