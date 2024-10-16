@@ -1,10 +1,7 @@
 <script>
+    import CreateNewList from "../components/CreateNewList.svelte";
     import StackLayout from "../components/StackLayout.svelte";
     import { user } from "../lib/user.store";
-
-    if ($user === null) {
-        // fetch user here
-    }
 </script>
 
 <StackLayout>
@@ -16,15 +13,30 @@
             {/if}
         </div>
     </svelte:fragment>
-    <svelte:fragment slot="main">
-        {#if $user}
-            <div>
-                <input placeholder="Invitation Key" />
-                <button>Join</button>
-            </div>
-        {:else }
-            Initializing...
-        {/if}
-        <button>Create New List</button>
-    </svelte:fragment>
+    <div class="container" slot="main">
+        <div>
+            {#if $user}
+                <div>
+                    <input placeholder="Invitation Key" />
+                    <button>Join</button>
+                </div>
+                <CreateNewList />
+            {:else}
+                Initializing...
+            {/if}
+        </div>
+    </div>
 </StackLayout>
+
+<style>
+    .container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input {
+        margin: var(--space-medium);
+    }
+</style>

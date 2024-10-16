@@ -5,4 +5,18 @@ export type User = {
     name: string;
 }
 
-export const user: Writable<User | null> = writable({id:0, name: 'Test user'});
+let initialValue: User | null = null
+if (typeof window !== 'undefined' && window.sessionStorage) {
+    const item = sessionStorage.getItem('user')
+    if (item) {
+        initialValue = JSON.parse(item) as User
+    }
+}
+
+export function save(user: User) {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+        const item = sessionStorage.setItem('user', JSON.stringify(user))
+    }
+}
+
+export const user: Writable<User | null> = writable(initialValue);

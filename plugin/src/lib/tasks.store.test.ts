@@ -3,7 +3,7 @@ import { tasks, type Task, start, complete, reopen, reset, create, remove, STATE
 import { get } from 'svelte/store'
 
 // Initial setup for tasks 
-// the functiona makes sure that every new test starts with the same initial state without mutations
+// the frnctiona makes sure that every new test starts with the same initial state without mutations
 const initialTasks: () => Task[] = () => [
     { id: 1, title: 'Task 1', state: STATES.TODO, owner: { id: 1, name: 'test' }, updated_at: new Date() },
     { id: 2, title: 'Task 2', state: STATES.ONGOING, owner: { id: 1, name: 'test' }, updated_at: new Date() },

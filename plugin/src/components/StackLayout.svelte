@@ -2,7 +2,7 @@
     import svelteLogo from "/svelte.svg";
     import viteLogo from "/vite.svg";
 
-    export let scrollable: HTMLElement | null = null
+    export let scrollable: HTMLElement | null = null;
 </script>
 
 <header>
@@ -14,9 +14,7 @@
     </div>
 {/if}
 <main bind:this={scrollable}>
-    <div class="scrollable">
-        <slot name="main" />
-    </div>
+    <slot name="main" />
 </main>
 <footer>
     <slot name="footer">
@@ -53,12 +51,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .scrollable {
-        max-height: 100%;
-        width: 100%;
-        align-self: flex-start;
     }
 
     footer {

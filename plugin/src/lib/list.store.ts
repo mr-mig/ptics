@@ -1,9 +1,23 @@
 import { writable, type Writable } from 'svelte/store';
 
-type List = {
+export type List = {
     id: number;
     title: string;
-    join_key: string;
+    login_key: string;
 }
 
-export const list: Writable<List | null> = writable({id: 1, title: 'List 1', join_key: '1234asdasd'});
+let initialValue: List | null = null
+if (typeof window !== 'undefined' && window.sessionStorage) {
+    const item = sessionStorage.getItem('list')
+    if (item) {
+        initialValue = JSON.parse(item) as List
+    }
+}
+
+export function save(list: List) {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+        const item = sessionStorage.setItem('list', JSON.stringify(list))
+    }
+}
+
+export const list: Writable<List | null> = writable(initialValue);

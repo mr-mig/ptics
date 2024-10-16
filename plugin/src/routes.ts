@@ -8,12 +8,12 @@ import { list } from './lib/list.store';
 
 const userExists = () => {
     const storedUser = get(user)
-    return storedUser != null
+    return !!storedUser
 }
 
 const listJoined = () => {
     const storedListKey = get(list)
-    return storedListKey != null
+    return !!storedListKey
 }
 
 export default {
@@ -24,6 +24,12 @@ export default {
         ]
     }),
     '/join': JoilList,
+    '/list/:id': wrap({
+        component: ViewList,
+        conditions: [
+            userExists
+        ]
+    }),
 
     // Catch-all
     // This is optional, but if present it must be the last
