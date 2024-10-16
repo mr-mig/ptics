@@ -1,0 +1,31 @@
+name: "ptics-api-stack"
+
+services:
+  postgres:
+    image: postgres:16.1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: myapp_production
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  rails-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/myapp_production
+      RAILS_MASTER_KEY: 809cb26b4bb525c8c1f98c923e665ec7
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    command: bash -c "bundle exec rails db:migrate RAILS_ENV=production && rm -f tmp/pids/server.pid && bundle exec rails server -b '0.0.0.0'"
+
+volumes:
+  postgres_data:

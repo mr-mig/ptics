@@ -1,4 +1,4 @@
-name: "ptics"
+name: "ptics-dev"
 
 services:
   rails-app:
