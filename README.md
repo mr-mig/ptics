@@ -5,6 +5,8 @@
 
 Technical case study focused on interplay of fullstack technologies in Docker containers.
 
+![PTICS client](https://github.com/user-attachments/assets/31993dee-9307-495b-997a-5df7a7c125ca)
+
 Stack:
 
 - Rails
@@ -42,6 +44,7 @@ It should automatically open the directory containing build artifacts when finis
     scripts/package-api.sh
     ```
 4. Run Rails server
+
 
     ```bash
     scripts/run-api.sh
@@ -149,3 +152,5 @@ To do that, you need to make some manual setup on your Mac:
 ⚠️ Most likely it won't work for the initial setup. Follow the steps in [this guide](https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088) to have the clean state.
 
 ⚠️ If you switch between host machine and devcontainer development, you need to run `scripts/build-clean-host.sh` to recompile Electron dependencies for targeted arch and OS.
+
+
