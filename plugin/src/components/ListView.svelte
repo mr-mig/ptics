@@ -3,7 +3,7 @@
     import { fetchTasks } from "../lib/api";
     import { list } from "../lib/list.store";
     import { get } from "svelte/store";
-    import type { Task } from "../lib/tasks.store";
+    import type { Task } from "../lib/tasks";
     import TaskView from "./TaskView.svelte";
 
     const tasks = useQuery<Task[], Error>(

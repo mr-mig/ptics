@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { complete, remove, reopen, reset, start, STATES, type Task } from "../lib/tasks.store";
+    import { complete, remove, reopen, reset, start, STATES, type Task } from "../lib/tasks";
     import ChangeTaskButtons from "./ChangeTaskButtons.svelte";
     import RemoveTaskButton from "./RemoveTaskButton.svelte";
 

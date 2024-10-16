@@ -1,7 +1,7 @@
 import { user, type User } from "./user.store"
 import { list, type List } from "./list.store"
 import { get } from "svelte/store"
-import type { Task } from "./tasks.store"
+import type { Task } from "./tasks"
 
 export async function getUser() {
     const response = await fetch('http://localhost:3000/')

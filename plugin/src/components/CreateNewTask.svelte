@@ -1,6 +1,6 @@
 <script lang="ts">
     import { useMutation, useQueryClient } from "@sveltestack/svelte-query";
-    import { create, type Task } from "../lib/tasks.store";
+    import { create, type Task } from "../lib/tasks";
     import { createEventDispatcher } from "svelte";
     import { createTask } from "../lib/api";
 

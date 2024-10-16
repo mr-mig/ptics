@@ -1,6 +1,6 @@
 <script lang="ts">
     import { useMutation, useQueryClient } from "@sveltestack/svelte-query";
-    import { STATES, type PossibleStates, type Task } from "../lib/tasks.store";
+    import { STATES, type PossibleStates, type Task, update, start, reopen, reset, complete } from "../lib/tasks";
     import { updateTask } from "../lib/api";
 
     export let task: Task | undefined = undefined;
@@ -13,7 +13,7 @@
             client.cancelQueries("tasks");
             const previousValues = client.getQueryData<Task[]>("tasks");
             client.setQueryData<Task[]>("tasks", (old: Task[] | undefined) =>
-                old !== undefined ? old.map((t) => t.id === task.id ? task : t) : [],
+                old !== undefined ? update(task, old) : [],
             );
             return previousValues;
         },
@@ -29,22 +29,22 @@
         }
     });
 
-    function handleClick(state: PossibleStates) {
+    function handleClick(transition: (task: Task) => Task) {
         return () => {
             if (task) {
-                $updateMutation.mutate({ ...task, state });
+                $updateMutation.mutate(transition(task));
             }
         }
     }
 </script>
 
 {#if task && task.state === STATES.TODO}
-    <button class="small" on:click={handleClick(STATES.ONGOING)}>▶️</button>
+    <button class="small" on:click={handleClick(start)}>▶️</button>
 {/if}
 {#if task && task.state === STATES.ONGOING}
-    <button class="small" on:click={handleClick(STATES.TODO)}>⏮️</button>
-    <button class="small" on:click={handleClick(STATES.DONE)}>✅</button>
+    <button class="small" on:click={handleClick(reset)}>⏮️</button>
+    <button class="small" on:click={handleClick(complete)}>✅</button>
 {/if}
 {#if task && task.state === STATES.DONE}
-    <button class="small" on:click={handleClick(STATES.ONGOING)}>♻️</button>
+    <button class="small" on:click={handleClick(reopen)}>♻️</button>
 {/if}

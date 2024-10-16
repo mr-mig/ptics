@@ -1,6 +1,6 @@
 <script lang="ts">
     import { useMutation, useQueryClient } from "@sveltestack/svelte-query";
-    import type { Task } from "../lib/tasks.store";
+    import type { Task } from "../lib/tasks";
     import { removeTask } from "../lib/api"; // Adjust the import path as necessary
 
     export let task: Task | undefined = undefined;
