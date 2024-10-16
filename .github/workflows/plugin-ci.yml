@@ -20,5 +20,5 @@ jobs:
           node-version: '22'
           cache: 'npm'
           cache-dependency-path: plugin/package-lock.json
-      - run: npm ci
-      - run: npm test
+      - run: cd plugin && npm ci
+      - run: cd plugin && npm test
