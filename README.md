@@ -76,24 +76,34 @@ When you boot into the Devcontainer, it will automatically install basic depende
 Depending on what part of the stack you are planning to work on, you will need the following scripts:
 
 1. `/api`
-    - `scripts/build-api.sh`  
-      Install and build the dependencies needed for development
-
-    - `scripts/test-api.sh`  
-      Run tests once
-
-    - `scripts/dev-api.sh`  
-      Runs a server on `http://localhost:3000`
-2. `/plugin`
-    - `scripts/build-plugin.sh`  
-      Install and build the dependencies
-
-    - `scripts/test-plugin.sh`  
-      Run tests once
+    - Install and build the dependencies needed for development
+      ```bash
+      scripts/build-api.sh
+      ```
+    - Run tests once
+      ```bash
+      scripts/test-api.sh
+      ```
+    - Runs a server on `http://localhost:3000`  
+      ```bash
+      scripts/dev-api.sh
+      ```
       
-    - `scripts/dev-plugin.sh`  
-      Run the dev server and serve the plugin content on `http://localhost:3002`.  
+2. `/plugin`
+    - Install and build the dependencies  
+      ```bash
+      scripts/build-plugin.sh
+      ```
+    - Run tests once  
+      ```bash
+      scripts/test-plugin.sh
+      ```
+    - Run the dev server and serve the plugin content on `http://localhost:3002`.  
       You can open it in the browser. Each new tab will have a separate session with a new user.
+      ```bash
+      scripts/dev-plugin.sh
+      ```
+      
        
 
 ### Electron development on host machine
@@ -103,14 +113,19 @@ This is **a preferred way of developing electron app**.
 You can run both server and plugin in _Devcontainer_ and Electron on )_your dev machine_. The ports will be forwarded automatically.
 
 1. `/host`  
-    - `scripts/build-clean-host.sh`  
-      Install and **recompile**  dependencies for Electron from scratch
-
-    - `scripts/build-host.sh`  
-        Install dependencies without **recompiling**
-
-    - `scripts/dev-host.sh`  
-      Run a single Electron app process
+    - Install and **recompile**  dependencies for Electron from scratch
+      ```bash
+      scripts/build-clean-host.sh
+      ```
+    - Install dependencies without **recompiling**  
+      ```bash
+      scripts/build-host.sh
+      ```
+    - Run a single Electron app process  
+      ```bash
+      scripts/dev-host.sh
+      ```
+      
 
 ### Electron development in Devcontainer: X11 pass-through for Mac
 
