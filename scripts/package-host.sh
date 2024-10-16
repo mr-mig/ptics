@@ -1,7 +1,7 @@
 #!/bin/bash
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 
-. "$SCRIPT_DIR"/build-plugin.sh
+. "$SCRIPT_DIR"/build-clean-host.sh
 cd ../host && npm run make
 
 # Open the host directory in the OS file browser
