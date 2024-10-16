@@ -11,7 +11,7 @@ Stack:
 
 - Rails
 - Electron
-- Svelte
+- Svelte + TypeScript
 
 ## Running the apps
 
@@ -153,4 +153,57 @@ To do that, you need to make some manual setup on your Mac:
 
 ⚠️ If you switch between host machine and devcontainer development, you need to run `scripts/build-clean-host.sh` to recompile Electron dependencies for targeted arch and OS.
 
+## Case Study Requirements Analysis
 
+After reading the shared Context document and job description, I've decided to focus on several key aspects:
+
+1. Fullstack interplay between API server, Svelte plugin and Electron host app
+2. Utilizing Docker and Devcontainer
+3. Making the complete pipeline work end-to-end
+4. Cutting fewer corners than usual for a take-home exercise
+
+The following task description revealed specific requirements for three distinct components of the stack.
+
+### RESTful API
+- [x] Modelling List, Task, and User objects with relationships
+- [x] RESTful API should represent models as resources
+- [x] Each resource contains some metadata (`updated_at`, `created_at`) 
+- [x] Must run locally
+- Use-cases
+  - [x] Create a User on the initial request
+  - [x] List Actions
+      - [x] Create
+      - [x] Delete
+      - [x] Show
+      - [x] Join by login key
+  - [x] Task Actions
+      - [x] Create
+      - [x] Update (transition between states)
+      - [x] Delete
+      - [x] Show All
+
+### Electron Host
+- [x] Incorporate a Plugin inside the packaged app
+- [x] Builds for Mac and Windows
+
+### Svelte Plugin
+- [x] Fetching User on initialization
+- [x] Data should stay in sync
+    - [x] List and Tasks stay in sync for different users who joined the List
+    - [x] App maintains the loading state and retries
+- [x] List Actions
+    - [x] Create
+    - [x] Delete
+    - [x] Show
+    - [x] Join by login key
+    - [x] Persisted in a single session
+- [x] Task Actions
+    - [x] Create
+    - [x] Update (transition between states)
+    - [x] Delete
+    - [x] Show All
+    - [x] Show Metadata
+
+### Common Requirements
+- [x] Tests should be present in different parts of the stack
+- [x] Components should be built based on a script
