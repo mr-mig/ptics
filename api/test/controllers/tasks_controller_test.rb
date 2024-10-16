@@ -17,8 +17,8 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :created
     json_response = JSON.parse(response.body)
-    assert_equal @task.owner_id, json_response['owner']['id']
-    assert_equal @task.owner.name, json_response['owner']['name']
+    assert_equal @task.owner_id, json_response["owner"]["id"]
+    assert_equal @task.owner.name, json_response["owner"]["name"]
   end
 
   test "should create task with default state if not state parameter is passed" do
@@ -51,7 +51,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     json_response = JSON.parse(response.body)
     returned_titles = json_response.map { |task| task["title"] }
 
-    assert_equal ["Task 2", "Task 1", "Task 3"], returned_titles
+    assert_equal [ "Task 2", "Task 1", "Task 3" ], returned_titles
   end
 
   test "should transition task between states" do
@@ -66,7 +66,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     @task.reload
     assert_equal "ongoing", @task.state
   end
-  
+
   test "should transition task: ongoing -> done" do
     @task.update!(state: "ongoing")
     patch task_url(@task), params: { task: { state: "done" } }, as: :json
@@ -74,7 +74,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     @task.reload
     assert_equal "done", @task.state
   end
-  
+
   test "should transition task: done -> ongoing" do
     @task.update!(state: "done")
     patch task_url(@task), params: { task: { state: "ongoing" } }, as: :json
@@ -82,7 +82,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     @task.reload
     assert_equal "ongoing", @task.state
   end
-  
+
   test "should transition task: ongoing -> todo" do
     @task.update!(state: "ongoing")
     patch task_url(@task), params: { task: { state: "todo" } }, as: :json

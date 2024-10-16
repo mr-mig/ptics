@@ -3,10 +3,10 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    if (params[:list_id])
+    if params[:list_id]
       @list = List.find(params[:list_id])
       @tasks = @list.tasks.order(created_at: :asc)
-    else 
+    else
       @tasks = Task.all.order(created_at: :asc)
     end
 

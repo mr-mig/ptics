@@ -76,5 +76,4 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     get invitation_lists_url, params: { login_key: "123456" }, as: :json
     assert_response :not_found
   end
-
 end
