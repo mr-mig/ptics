@@ -39,6 +39,21 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should return tasks in ascending order by creation date" do
+    new_list = List.create!(title: "New List", owner_id: @task.owner_id)
+    task1 = Task.create!(title: "Task 1", state: "todo", list_id: new_list.id, owner_id: @task.owner_id, created_at: 1.days.ago)
+    task2 = Task.create!(title: "Task 2", state: "todo", list_id: new_list.id, owner_id: @task.owner_id, created_at: 2.day.ago)
+    task3 = Task.create!(title: "Task 3", state: "todo", list_id: new_list.id, owner_id: @task.owner_id, created_at: Time.now)
+
+    get list_tasks_url(new_list), as: :json
+    assert_response :success
+
+    json_response = JSON.parse(response.body)
+    returned_titles = json_response.map { |task| task["title"] }
+
+    assert_equal ["Task 2", "Task 1", "Task 3"], returned_titles
+  end
+
   test "should transition task between states" do
     patch task_url(@task), params: { task: { list_id: @task.list_id, owner_id: @task.owner_id, state: "ongoing", title: @task.title } }, as: :json
     assert_response :success

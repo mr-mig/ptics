@@ -5,9 +5,9 @@ class TasksController < ApplicationController
   def index
     if (params[:list_id])
       @list = List.find(params[:list_id])
-      @tasks = @list.tasks
+      @tasks = @list.tasks.order(created_at: :asc)
     else 
-      @tasks = Task.all
+      @tasks = Task.all.order(created_at: :asc)
     end
 
     render json: @tasks.as_json(include: :owner)
