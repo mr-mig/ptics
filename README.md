@@ -162,12 +162,19 @@ After reading the shared Context document and job description, I've decided to f
 3. Making the complete pipeline work end-to-end
 4. Cutting fewer corners than usual for a take-home exercise
 
+I've strived to balance quality, attention to detail, and implementing all the explicit requirements.
+
+This led to some corners being cut:
+- Security considerations are minimal
+- Performance considerations are minimal
+- Testing is not exhaustive
+
 The following task description revealed specific requirements for three distinct components of the stack.
 
 ### RESTful API
 - [x] Modelling List, Task, and User objects with relationships
 - [x] RESTful API should represent models as resources
-- [x] Each resource contains some metadata (`updated_at`, `created_at`) 
+- [x] Each resource contains some metadata (`updated_at`, `created_at`, `login_key`) 
 - [x] Must run locally
 - Use-cases
   - [x] Create a User on the initial request
@@ -183,10 +190,12 @@ The following task description revealed specific requirements for three distinct
       - [x] Show All
 
 ### Electron Host
+- [x] Must run locally
 - [x] Incorporate a Plugin inside the packaged app
 - [x] Builds for Mac and Windows
 
 ### Svelte Plugin
+- [x] Must run locally
 - [x] Fetching User on initialization
 - [x] Data should stay in sync
     - [x] List and Tasks stay in sync for different users who joined the List
@@ -207,3 +216,40 @@ The following task description revealed specific requirements for three distinct
 ### Common Requirements
 - [x] Tests should be present in different parts of the stack
 - [x] Components should be built based on a script
+- [x] Solution should be presented as GitHub repo
+
+### Upstream/Downstream dependencies
+No special requirements for integrating the solution with eternal systems
+
+### Limits and Boundary Conditions
+- [x] CI/CD is not required
+- [x] Things must be able to be built locally
+
+### Available Resources
+No special requirements regarding compute, storage, servers, infrastructure, etc.
+
+### Assumptions
+- I assume basic knowledge of Docker and Devcontainer technologies, as well as all explicitly listed technologies (Svelte, Electron)
+- The UI should be subjectively beautiful
+- Some prudence regarding the UI/UX details is expected
+- Data Sync is one of the core requirements
+- Plain HTTP requests are ok for current demo
+
+### Trade-offs
+- I chose Rails for API as the backend tech I am most efficient with right now
+  - Not very performant compute wise
+  - Hard to setup outside the devcontainer (too many dependencies)
+  - Steep learning curve - may be unfamiliar
+  - Comes with **a lot** of decisions baked in
+    
+- I chose Svelte (and not SvelteKit) to keep it simpler, as I had no previous experience with it
+  - More boilerplate code
+  - Less overall structure
+  - No architectural guidelines
+ 
+- I decided to **not** implement Websocket support for Data Sync, as it was not listed in the requirements, and RESTful was emphasized
+  - Plain HTTP requests for data sync create excessive network load (ok for demo)
+
+- Used `Svelte Query` for network requests and cache management
+  - Steep learning curve for those who are unfamiliar with the concepts
+  - Boilerplate code for Optimistic Updates
