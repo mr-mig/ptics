@@ -51,7 +51,7 @@ export function create(taskTitle: string) {
         title: taskTitle,
         state: STATES.TODO,
         owner: get(user)!,
-        updated_at: new Date(),
+        updated_at: new Date().toISOString(),
     };
     return task
 }

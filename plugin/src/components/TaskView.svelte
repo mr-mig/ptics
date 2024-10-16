@@ -1,5 +1,6 @@
 <script lang="ts">
     import { complete, remove, reopen, reset, start, STATES, type Task } from "../lib/tasks.store";
+    import RemoveTaskButton from "./RemoveTaskButton.svelte";
 
     export let task: Task;
     
@@ -47,7 +48,7 @@
         </div>
     </div>
     <div class="delete-container">
-        <button class="small" on:click={() => remove(task)}>❌</button>
+        <RemoveTaskButton {task} />
     </div>
 </div>
 
@@ -77,13 +78,6 @@
         padding: var(--space-medium) 0 var(--space-medium) var(--space-medium);
         flex-grow: 1;
         flex-basis: 3em;
-    }
-
-    button.small {
-        font-size: 0.8em;
-        height: 2.2em;
-        vertical-align: middle;
-        padding: var(--space-xsmall) var(--space-small);
     }
 
     .title {

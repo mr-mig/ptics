@@ -71,6 +71,13 @@ input {
   box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.5), inset 0px 0px 2px rgba(255, 255, 255, 0.5);
 }
 
+button.small {
+  font-size: 0.8em;
+  height: 2.2em;
+  vertical-align: middle;
+  padding: var(--space-xsmall) var(--space-small);
+}
+
 button {
   cursor: pointer;
   transition: border-color 0.25s;

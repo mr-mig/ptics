@@ -12,7 +12,7 @@ export async function getUser() {
     return response.json()
 }
 
-export async function createNewList(list: List){
+export async function createNewList(list: List) {
     const response = await fetch('http://localhost:3000/lists', {
         method: 'POST',
         headers: {
@@ -24,7 +24,9 @@ export async function createNewList(list: List){
         }),
     })
     if (!response.ok) {
-        throw new Error('Network error while creating new list')
+        return response.json().then(body => {
+            throw new Error(`Can't create task: ${body.error}`);
+        })
     }
 
     return response.json()
@@ -77,4 +79,16 @@ export async function joinInvitation(login_key: string) {
     }
 
     return response.json() as Promise<List>;
+}
+
+export async function removeTask(id: number) {
+    const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+        method: 'DELETE',
+    })
+
+    if (!response.ok) {
+        return response.json().then(body => {
+            throw new Error(`Can't remove task: ${body.error}`);
+        })
+    }
 }
