@@ -1,5 +1,6 @@
 <script lang="ts">
     import { complete, remove, reopen, reset, start, STATES, type Task } from "../lib/tasks.store";
+    import ChangeTaskButtons from "./ChangeTaskButtons.svelte";
     import RemoveTaskButton from "./RemoveTaskButton.svelte";
 
     export let task: Task;
@@ -25,19 +26,7 @@
 <div class="panel">
     <div class="status" class:active={task.state === 'ongoing'}></div>
     <div class="actions">
-        {#if task.state === STATES.TODO}
-            <button class="small" on:click={() => start(task)}>▶️</button>
-        {/if}
-        {#if task.state === STATES.ONGOING}
-            <button class="small" on:click={() => reset(task)}>⏮️</button>
-            <button class="small" on:click={() => complete(task)}>✅</button>
-        {/if}
-        {#if task.state === STATES.DONE}
-            <button class="small" on:click={() => reopen(task)}>♻️</button>
-        {/if}
-        
-        
-        
+       <ChangeTaskButtons task={task}/>
     </div>
     <div class="title" class:strike={task.state === 'done'}>{task.title}</div>
     <div class="metadata">

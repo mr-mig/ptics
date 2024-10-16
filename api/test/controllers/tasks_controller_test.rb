@@ -44,6 +44,38 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should transition task: todo -> ongoing" do
+    @task.update!(state: "todo")
+    patch task_url(@task), params: { task: { state: "ongoing" } }, as: :json
+    assert_response :success
+    @task.reload
+    assert_equal "ongoing", @task.state
+  end
+  
+  test "should transition task: ongoing -> done" do
+    @task.update!(state: "ongoing")
+    patch task_url(@task), params: { task: { state: "done" } }, as: :json
+    assert_response :success
+    @task.reload
+    assert_equal "done", @task.state
+  end
+  
+  test "should transition task: done -> ongoing" do
+    @task.update!(state: "done")
+    patch task_url(@task), params: { task: { state: "ongoing" } }, as: :json
+    assert_response :success
+    @task.reload
+    assert_equal "ongoing", @task.state
+  end
+  
+  test "should transition task: ongoing -> todo" do
+    @task.update!(state: "ongoing")
+    patch task_url(@task), params: { task: { state: "todo" } }, as: :json
+    assert_response :success
+    @task.reload
+    assert_equal "todo", @task.state
+  end
+
   test "should return validation error when incorrect state transition is requested" do
     @task.start!
     @task.complete!

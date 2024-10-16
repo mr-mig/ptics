@@ -65,7 +65,11 @@ class TasksController < ApplicationController
     def transition_state(new_state)
       case new_state
       when "ongoing"
-        @task.start
+        if @task.done?
+          @task.reopen
+        else
+          @task.start
+        end
       when "done"
         @task.complete
       when "todo"

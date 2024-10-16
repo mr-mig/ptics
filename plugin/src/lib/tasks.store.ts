@@ -9,10 +9,12 @@ export const STATES = {
     DONE: 'done'
 } as const
 
+export type PossibleStates = typeof STATES[keyof typeof STATES];
+
 export type Task = {
     id: number;
     title: string;
-    state: typeof STATES.DONE | typeof STATES.ONGOING | typeof STATES.TODO;
+    state: PossibleStates;
     owner: User;
     updated_at: string;
 }

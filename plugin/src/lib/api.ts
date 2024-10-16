@@ -92,3 +92,19 @@ export async function removeTask(id: number) {
         })
     }
 }
+
+export async function updateTask(task: Task) {
+    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(task)
+    });
+
+    if (!response.ok) {
+        return response.json().then(body => {
+            throw new Error(`Can't update task: ${body.error}`);
+        })
+    }
+}

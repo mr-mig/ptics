@@ -11,7 +11,7 @@
         () => fetchTasks(get(list)!.id),
         {
             initialData: [],
-            refetchInterval: 2*1000,
+            refetchInterval: 1*1000,
             refetchIntervalInBackground: true,
         }
     );
