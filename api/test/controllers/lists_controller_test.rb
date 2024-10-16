@@ -18,12 +18,14 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create list" do
+    title = Faker::Adjective.positive
     assert_difference("List.count") do
-      post lists_url, params: { list: { owner_id: @list.owner_id, title: @list.title } }, as: :json
+      post lists_url, params: { list: { owner_id: @list.owner_id, title: title } }, as: :json
     end
 
     assert_response :created
     created_list = List.last
+    assert_equal title, created_list.title
     assert_not_nil created_list.login_key
     assert_equal 20, created_list.login_key.length
   end
