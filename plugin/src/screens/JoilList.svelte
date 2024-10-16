@@ -1,5 +1,6 @@
 <script>
     import CreateNewList from "../components/CreateNewList.svelte";
+    import JoinInvitation from "../components/JoinInvitation.svelte";
     import StackLayout from "../components/StackLayout.svelte";
     import { user } from "../lib/user.store";
 </script>
@@ -16,11 +17,12 @@
     <div class="container" slot="main">
         <div>
             {#if $user}
-                <div>
-                    <input placeholder="Invitation Key" />
-                    <button>Join</button>
+                <div class="inputs">
+                    <JoinInvitation />
                 </div>
-                <CreateNewList />
+                <div class="inputs">
+                    <CreateNewList />
+                </div>
             {:else}
                 Initializing...
             {/if}
@@ -35,8 +37,7 @@
         justify-content: center;
         align-items: center;
     }
-
-    input {
-        margin: var(--space-medium);
+    .inputs {
+        margin: var(--space-small);
     }
 </style>

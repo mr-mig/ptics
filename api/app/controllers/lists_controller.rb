@@ -10,7 +10,7 @@ class ListsController < ApplicationController
 
   # GET /lists/1
   def show
-    render json: @list.to_json(include: :tasks)
+    render json: @list
   end
 
   # POST /lists
@@ -43,6 +43,16 @@ class ListsController < ApplicationController
   # DELETE /lists/1
   def destroy
     @list.destroy!
+  end
+
+  # POST /lists/invitation
+  def invitation
+    list = List.find_by(login_key: params[:login_key])
+    if list.nil?
+      render json: { error: "List not found" }, status: :not_found
+    else
+      render json: list
+    end
   end
 
   private

@@ -49,7 +49,6 @@ export async function createTask(title: string) {
     return response.json()
 }
 
-// TODO: change this
 export async function fetchTasks(listId: number) {
     const response = await fetch(`http://localhost:3000/lists/${listId}/tasks`)
     if (!response.ok) {
@@ -60,4 +59,22 @@ export async function fetchTasks(listId: number) {
     return response.json().then((data) => {
         return (data as Task[]).reverse()
     })
+}
+
+export async function joinInvitation(login_key: string) {
+    const response = await fetch('http://localhost:3000/lists/invitation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ login_key })
+    });
+
+    if (!response.ok) {
+        return response.json().then(body => {
+            throw new Error(`Can't join invitation: ${body.error}`);
+        })
+    }
+
+    return response.json() as Promise<List>;
 }

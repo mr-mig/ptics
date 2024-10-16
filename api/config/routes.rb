@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   root "home#index"
   resources :lists do
+    collection do
+      post 'invitation', to: 'lists#invitation'
+    end
+    
     resources :tasks, only: [:index]
   end
+
 
   resources :tasks
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
