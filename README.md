@@ -1,5 +1,6 @@
 # PTICS
-!["CI badge"](https://github.com/mr-mig/ptics/actions/workflows/api-ci.yml/badge.svg)
+!["API CI badge"](https://github.com/mr-mig/ptics/actions/workflows/api-ci.yml/badge.svg)
+!["Plugin CI badge"](https://github.com/mr-mig/ptics/actions/workflows/plugin-ci.yml/badge.svg)
 ---
 
 Technical case study focused on interplay of fullstack technologies in Docker containers.
